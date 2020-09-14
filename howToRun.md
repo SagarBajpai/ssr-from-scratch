@@ -1,8 +1,5 @@
-##Booting up the Client and taking charge from the server:
+## Splitting the Webpack into Base Config
 
-So what actually happening here is, first our server loads the `Home` component from the server side inside `root` id (Check `src/index.js`).
-After first rendering on broswer, our `bundle.js` starts to Boot up. Now this Client Side Bundle has to take the charge from the server, so that we can do our client side routing using `react-router` and enjoy the react's single page application feature.
+Right now, if you see `webpack.base.js` and `webpack.client.js` has some common code. In future we will have more common code, so we need to create some base config which is going to be common between both.
 
-After all, one of the main reason to do SSR is to have faster initial load times, which we have achieved by rendering the `Home` component from server.
-
-React bundle will take the charge from the server, hydrate all the Javascript event handlers. Check `src/client/client.js`.
+We'll use `webpack-merge` package to do do.
