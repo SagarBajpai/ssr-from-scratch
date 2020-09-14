@@ -1,4 +1,8 @@
-## Single command to run server webpack, client webpack and nodemon
+## Optimizing Server Build
 
-Right now, we have to run 3 commands independently on 3 terminals, `dev:server` , `dev:build:server` and `dev:build:client`.
-We'll use the package `npm-run-all` that'll run the commands in parallel in 1 terminal.
+Right now, server side build includes all the libraries, doesn't matter we are using it or not in the project. `webpack-node-externals` library will make sure to include only those library which we are actually using.
+
+Before `webpack-node-externals` server build was around 750Kb.
+After using it, it is only 4.26Kb.
+
+That's huge tight ;)
