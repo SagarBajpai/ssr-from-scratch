@@ -7044,7 +7044,7 @@ app.use(express.static("public"));
 app.get("/", function (req, res) {
   var content = renderToString(React.createElement(Home, null));
 
-  var html = "<html>\n                  <head>\n                    <body>" + content + "</body>\n                    <script src=\"bundle.js\"></script>\n                  </head>\n                </html>";
+  var html = "<html>\n                  <head>\n                    <body>\n                    <div id=\"root\">" + content + "</div>\n                    </body>\n                    <script src=\"bundle.js\"></script>\n                  </head>\n                </html>";
   res.send(html);
 });
 
@@ -22409,7 +22409,18 @@ var Home = function Home() {
   return _react2.default.createElement(
     "div",
     null,
-    "I'm a VERY VERY BEST Home Component!"
+    _react2.default.createElement(
+      "div",
+      null,
+      "I'm a VERY VERY BEST Home Component!"
+    ),
+    _react2.default.createElement(
+      "button",
+      { onClick: function onClick() {
+          return console.log("You actually hit me :/");
+        } },
+      "Hit Me Bro!"
+    )
   );
 };
 

@@ -10,7 +10,9 @@ app.get("/", (req, res) => {
 
   const html = `<html>
                   <head>
-                    <body>${content}</body>
+                    <body>
+                    <div id="root">${content}</div>
+                    </body>
                     <script src="bundle.js"></script>
                   </head>
                 </html>`;
