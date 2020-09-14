@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
+import renderer from "./helpers/renderer";
 const app = express();
-const renderer = require("./helpers/renderer").default;
 
 app.use(express.static("public"));
 app.get("/", (req, res) => {

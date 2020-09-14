@@ -1,6 +1,6 @@
-const React = require("react");
-const renderToString = require("react-dom/server").renderToString;
-const Home = require("../client/components/Home").default;
+import React from "react";
+import { renderToString } from "react-dom/server";
+import Home from "../client/components/Home";
 
 export default () => {
   const content = renderToString(<Home />);
