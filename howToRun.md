@@ -1,5 +1,4 @@
-## Splitting the Webpack into Base Config
+## Single command to run server webpack, client webpack and nodemon
 
-Right now, if you see `webpack.base.js` and `webpack.client.js` has some common code. In future we will have more common code, so we need to create some base config which is going to be common between both.
-
-We'll use `webpack-merge` package to do do.
+Right now, we have to run 3 commands independently on 3 terminals, `dev:server` , `dev:build:server` and `dev:build:client`.
+We'll use the package `npm-run-all` that'll run the commands in parallel in 1 terminal.
