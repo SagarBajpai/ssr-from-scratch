@@ -78,16 +78,11 @@ module.exports = require("react");
 
 var express = __webpack_require__(2);
 var app = express();
-var React = __webpack_require__(0);
-var renderToString = __webpack_require__(3).renderToString;
-var Home = __webpack_require__(4).default;
+var renderer = __webpack_require__(3).default;
 
 app.use(express.static("public"));
 app.get("/", function (req, res) {
-  var content = renderToString(React.createElement(Home, null));
-
-  var html = "<html>\n                  <head>\n                    <body>\n                    <div id=\"root\">" + content + "</div>\n                    </body>\n                    <script src=\"bundle.js\"></script>\n                  </head>\n                </html>";
-  res.send(html);
+  res.send(renderer());
 });
 
 app.listen(3003, function () {
@@ -102,12 +97,31 @@ module.exports = require("express");
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var React = __webpack_require__(0);
+var renderToString = __webpack_require__(4).renderToString;
+var Home = __webpack_require__(5).default;
+
+exports.default = function () {
+    var content = renderToString(React.createElement(Home, null));
+    return "<html>\n          <head>\n              <body>\n              <div id=\"root\">" + content + "</div>\n              </body>\n              <script src=\"bundle.js\"></script>\n          </head>\n        </html>";
+};
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
