@@ -7040,9 +7040,12 @@ var React = __webpack_require__(16);
 var renderToString = __webpack_require__(109).renderToString;
 var Home = __webpack_require__(120).default;
 
+app.use(express.static("public"));
 app.get("/", function (req, res) {
   var content = renderToString(React.createElement(Home, null));
-  res.send(content);
+
+  var html = "<html>\n                  <head>\n                    <body>" + content + "</body>\n                    <script src=\"bundle.js\"></script>\n                  </head>\n                </html>";
+  res.send(html);
 });
 
 app.listen(3003, function () {

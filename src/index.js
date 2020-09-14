@@ -4,9 +4,17 @@ const React = require("react");
 const renderToString = require("react-dom/server").renderToString;
 const Home = require("../src/client/components/Home").default;
 
+app.use(express.static("public"));
 app.get("/", (req, res) => {
   const content = renderToString(<Home />);
-  res.send(content);
+
+  const html = `<html>
+                  <head>
+                    <body>${content}</body>
+                    <script src="bundle.js"></script>
+                  </head>
+                </html>`;
+  res.send(html);
 });
 
 app.listen(3003, () => {
