@@ -164,6 +164,12 @@ var _createStore = __webpack_require__(14);
 
 var _createStore2 = _interopRequireDefault(_createStore);
 
+var _reactRouterConfig = __webpack_require__(18);
+
+var _Routes = __webpack_require__(10);
+
+var _Routes2 = _interopRequireDefault(_Routes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -172,10 +178,15 @@ app.use(_express2.default.static("public"));
 app.get("*", function (req, res) {
   var store = (0, _createStore2.default)();
 
-  // We will write some logic here to first initialize
-  // And then pass it to the store
+  var Promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
+    var route = _ref.route;
 
-  res.send((0, _renderer2.default)(req, store));
+    return route.loadOptions ? route.loadOptions(store) : null;
+  });
+
+  Promise.all(Promises).then(function () {
+    res.send((0, _renderer2.default)(req, store));
+  });
 });
 
 app.listen(3003, function () {
@@ -274,12 +285,13 @@ var _UsersList2 = _interopRequireDefault(_UsersList);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = [{
-  path: '/',
+  path: "/",
   component: _Home2.default,
   exact: true
 }, {
-  path: '/users',
-  component: _UsersList2.default
+  path: "/users",
+  component: _UsersList2.default,
+  loadOptions: _UsersList.loadOptions
 }];
 
 /***/ }),
@@ -330,6 +342,7 @@ exports.default = Home;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.loadOptions = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -395,6 +408,11 @@ function mapStatesToProps(state) {
   return { users: state.users };
 }
 
+function loadOptions(store) {
+  return store.dispatch((0, _actions.fetchUsers)());
+}
+
+exports.loadOptions = loadOptions;
 exports.default = (0, _reactRedux.connect)(mapStatesToProps, { fetchUsers: _actions.fetchUsers })(UsersList);
 
 /***/ }),
