@@ -1,8 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
+import Routes from "./Routes";
 
-ReactDOM.hydrate(<Home />, document.querySelector("#root"));
+ReactDOM.hydrate(
+  <BrowserRouter>
+    <Routes />
+  </BrowserRouter>,
+  document.querySelector("#root")
+);
 
 //Here we are not saying to replace the root element. But actually root has already DOM element inside it coming from the server.
 //What we are doing here is hydrating the existing DOM tree with event handlers and making our Javascript code live again. It is
