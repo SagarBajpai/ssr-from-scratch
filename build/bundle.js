@@ -248,7 +248,7 @@ exports.default = function (req, store) {
       )
     )
   ));
-  return "<html>\n          <head>\n              <body>\n              <div id=\"root\">" + content + "</div>\n              </body>\n              <script src=\"bundle.js\"></script>\n          </head>\n        </html>";
+  return "<html>\n          <head>\n              <body>\n              <div id=\"root\">" + content + "</div>\n              </body>\n              <script>\n                window.INITIAL_STATE = " + JSON.stringify(store.getState()) + "\n              </script>\n              <script src=\"bundle.js\"></script>\n          </head>\n        </html>";
 };
 
 /***/ }),
